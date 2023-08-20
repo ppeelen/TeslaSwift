@@ -8,11 +8,7 @@
 
 #if swift(>=5.1)
 import Combine
-#if COCOAPODS
-#else // SPM
 import TeslaSwift
-import TeslaSwiftStreaming
-#endif
 
 extension TeslaStreaming  {
     public func streamPublisher(vehicle: Vehicle) -> TeslaStreamingPublisher {

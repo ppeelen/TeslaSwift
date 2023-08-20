@@ -8,10 +8,7 @@
 
 import Foundation
 import Starscream
-#if COCOAPODS
-#else // SPM
 import TeslaSwift
-#endif
 
 enum TeslaStreamingError: Error {
     case streamingMissingVehicleTokenOrEmail
@@ -190,17 +187,10 @@ public class TeslaStreaming {
                     logDebug("Stream reconnectSuggested: \(reconnect)", debuggingEnabled: self.debuggingEnabled)
                 case .cancelled:
                     logDebug("Stream cancelled", debuggingEnabled: self.debuggingEnabled)
+                case .peerClosed:
+                    logDebug("Peer Closed", debuggingEnabled: self.debuggingEnabled)
             }
         }
 		httpStreaming.connect()
 	}
 }
-
-#if COCOAPODS
-#else // SPM
-func logDebug(_ format: String, debuggingEnabled: Bool) {
-    if debuggingEnabled {
-        print(format)
-    }
-}
-#endif

@@ -7,48 +7,6 @@ Swift library to access Tesla API based on [Tesla JSON API (Unofficial)](https:/
 
 ## Installation
 
-### Manual
-
-Copy `Sources` folder into your project
-
-### CocoaPods
-
-If you don't need any extensions, use this line
-
-```ruby
-pod 'TeslaSwift', '~> 8'
-```
-If you need PromiseKit extensions, use this line 
-
-```ruby
-pod 'TeslaSwift/PromiseKit', '~> 8'
-```
-If you need Combine extensions, use this line
-
-```ruby
-pod 'TeslaSwift/Combine', '~> 8'
-```
-If you need Rx extensions, use this line
-
-```ruby
-pod 'TeslaSwift/Rx', '~> 8'
-```
-
-#### Streaming extension
-
-```ruby
-pod 'TeslaSwift/Streaming', '~> 8'
-```
-If you need Combine extensions for Streaming, use this line
-```ruby
-pod 'TeslaSwift/StreamingCombine', '~> 8'
-```
-If you need Rx extensions for Streaming, use this line
-
-```ruby
-pod 'TeslaSwift/StreamingRx', '~> 8'
-```
-
 ### Swift Package Manager
 
 You can use [Swift Package Manager](https://swift.org/package-manager/) and specify a dependency in `Package.swift` by adding this or adding the dependency to Xcode:
@@ -57,8 +15,8 @@ You can use [Swift Package Manager](https://swift.org/package-manager/) and spec
 .Package(url: "https://github.com/jonasman/TeslaSwift.git", majorVersion: 8)
 ```
 
-There are also extensions for Combine `TeslaSwiftCombine`, PromiseKit `TeslaSwiftPMK` and Rx `TeslaSwiftRx`
-The Streaming extensions are: `TeslaSwiftStreaming`, Combine `TeslaSwiftStreamingCombine` and Rx `TeslaSwiftStreamingRx` 
+There are also extensions for Combine `TeslaSwiftCombine`
+The Streaming extensions are: `TeslaSwiftStreaming`, Combine `TeslaSwiftStreamingCombine` 
 
 ## Usage
 
@@ -81,14 +39,9 @@ import TeslaSwift
 Add the extension modules if needed (with the previous line)
 
 ```swift
-import TeslaSwiftPMK
-```
-```swift
 import TeslaSwiftCombine
 ```
-```swift
-import TeslaSwiftRx
-```
+
 
 Perform an authentication with your MyTesla credentials using the web oAuth2 flow with MFA support: 
 
@@ -195,9 +148,6 @@ Import the extension modules if needed (with the previous line)
 
 ```swift
 import TeslaSwiftStreamingCombine
-```
-```swift
-import TeslaSwiftStreamingRx
 ```
 ```swift
 class CarsViewController: ViewController {
