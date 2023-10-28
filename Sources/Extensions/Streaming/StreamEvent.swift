@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import TeslaSwift
 
 public enum TeslaStreamingEvent: Equatable {
     case open

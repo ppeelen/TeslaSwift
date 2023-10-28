@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import os.log
 
 public enum TeslaError: Error, Equatable {
     case networkError(error: NSError)

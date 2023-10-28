@@ -10,6 +10,7 @@ import UIKit
 #if canImport(Combine)
 import Combine
 #endif
+import TeslaSwift
 
 class FirstViewController: UIViewController, UITableViewDataSource {
     

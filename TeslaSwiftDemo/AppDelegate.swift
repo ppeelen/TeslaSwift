@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import TeslaSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

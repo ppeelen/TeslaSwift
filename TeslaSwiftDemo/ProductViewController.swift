@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import TeslaSwift
 
 class ProductViewController: UIViewController {
     @IBOutlet private weak var textView: UITextView!
@@ -71,7 +72,7 @@ class ProductViewController: UIViewController {
         guard let energySite = energySite else { return }
         Task { @MainActor in
             do {
-                let response = try await api.getEnergySiteHistory(siteID: "\(energySite.energySiteID)", period: .day)
+                let response = try await api.getEnergySiteHistory(siteID: "\(energySite.energySiteID)", period: EnergySiteHistory.Period.day)
                 self.textView.text = response.jsonString
             } catch let error {
                 self.textView.text = error.localizedDescription
