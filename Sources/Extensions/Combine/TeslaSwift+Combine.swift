@@ -8,10 +8,7 @@
 
 #if swift(>=5.1)
 import Combine
-#if COCOAPODS
-#else // SPM
 import TeslaSwift
-#endif
 
 extension TeslaSwift {
     public func revokeWeb() -> Future<Bool, Error> {
