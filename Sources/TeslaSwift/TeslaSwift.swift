@@ -264,13 +264,24 @@ extension TeslaSwift {
 //MARK: User APIs
 extension TeslaSwift {
     /**
-     Fetchs the list of your vehicles including not yet delivered ones
+     Fetchs info about the user
 
-     - returns: An array of Vehicles.
+     - returns: the user info
      */
     public func me() async throws -> Me {
         _ = try await checkAuthentication()
         let response: Response<Me> = try await request(.me, body: nullBody)
+        return response.response
+    }
+
+    /**
+     Fetchs the uer region
+
+     - returns: the user region
+     */
+    public func region() async throws -> Region {
+        _ = try await checkAuthentication()
+        let response: Response<Region> = try await request(.region, body: nullBody)
         return response.response
     }
 }

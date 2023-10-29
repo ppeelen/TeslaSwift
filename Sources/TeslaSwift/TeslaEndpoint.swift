@@ -18,6 +18,7 @@ enum Endpoint {
     case oAuth2revokeCN(token: String)
 
     case me
+    case region
 
     case partnerAccounts
 	case vehicles
@@ -62,6 +63,8 @@ extension Endpoint {
 
             case .me:
                 return "/api/1/users/me"
+            case .region:
+                return "/api/1/users/region"
             // Vehicle Data and Commands
             case .vehicles:
                 return "/api/1/vehicles"
@@ -116,7 +119,7 @@ extension Endpoint {
 		switch self {
             case .revoke, .oAuth2Token, .oAuth2TokenCN, .wakeUp, .partnerAccounts, .chargeHistory, .command:
                 return "POST"
-            case .me, .vehicles, .vehicleSummary, .mobileAccess, .allStates, .chargeState, .climateState, .driveState, .guiSettings, .vehicleState, .vehicleConfig, .nearbyChargingSites, .oAuth2Authorization, .oAuth2revoke, .oAuth2AuthorizationCN, .oAuth2revokeCN, .products, .getEnergySiteStatus, .getEnergySiteLiveStatus, .getEnergySiteInfo, .getEnergySiteHistory, .getBatteryStatus, .getBatteryData, .getBatteryPowerHistory:
+            case .me, .region, .vehicles, .vehicleSummary, .mobileAccess, .allStates, .chargeState, .climateState, .driveState, .guiSettings, .vehicleState, .vehicleConfig, .nearbyChargingSites, .oAuth2Authorization, .oAuth2revoke, .oAuth2AuthorizationCN, .oAuth2revokeCN, .products, .getEnergySiteStatus, .getEnergySiteLiveStatus, .getEnergySiteInfo, .getEnergySiteHistory, .getBatteryStatus, .getBatteryData, .getBatteryPowerHistory:
                 return "GET"
 		}
 	}

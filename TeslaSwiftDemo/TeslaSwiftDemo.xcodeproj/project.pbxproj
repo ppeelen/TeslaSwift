@@ -95,6 +95,7 @@
 		CFCA83852AEEC55F001A1B0C /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCA83842AEEC55F001A1B0C /* Partner.swift */; };
 		CFCA83872AEEFF08001A1B0C /* ChargeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCA83862AEEFF08001A1B0C /* ChargeHistory.swift */; };
 		CFCA83892AEF09E1001A1B0C /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCA83882AEF09E1001A1B0C /* Me.swift */; };
+		CFCA838B2AEF0AFE001A1B0C /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCA838A2AEF0AFE001A1B0C /* Region.swift */; };
 		CFD2E7C51C8A13D60005E882 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2E7C41C8A13D60005E882 /* AppDelegate.swift */; };
 		CFD2E7C71C8A13D60005E882 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2E7C61C8A13D60005E882 /* FirstViewController.swift */; };
 		CFD2E7C91C8A13D60005E882 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2E7C81C8A13D60005E882 /* SecondViewController.swift */; };
@@ -225,6 +226,7 @@
 		CFCA83842AEEC55F001A1B0C /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
 		CFCA83862AEEFF08001A1B0C /* ChargeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeHistory.swift; sourceTree = "<group>"; };
 		CFCA83882AEF09E1001A1B0C /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
+		CFCA838A2AEF0AFE001A1B0C /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		CFD2E7C11C8A13D60005E882 /* TeslaSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeslaSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD2E7C41C8A13D60005E882 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFD2E7C61C8A13D60005E882 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				CF0D2F1F1D95A4A900E5A304 /* GuiSettings.swift */,
 				1AA73E8B235B3FA40088D66A /* MaxDefrostCommandOptions.swift */,
 				CFCA83882AEF09E1001A1B0C /* Me.swift */,
+				CFCA838A2AEF0AFE001A1B0C /* Region.swift */,
 				65F055172173DB3D00BE3BE5 /* ShareToVehicleOptions.swift */,
 				170D32D222D0EBCD00B6A51A /* NearbyChargingSites.swift */,
 				1AA73E85235B37560088D66A /* HomeLinkCommandOptions.swift */,
@@ -694,6 +697,7 @@
 				CF0D2F2A1D95A4A900E5A304 /* ClimateState.swift in Sources */,
 				CF0D2F341D95A4A900E5A304 /* OpenTrunkOptions.swift in Sources */,
 				CFD2E7DC1C8A13D60005E882 /* TeslaSwiftTests.swift in Sources */,
+				CFCA838B2AEF0AFE001A1B0C /* Region.swift in Sources */,
 				708FBA58274E9D1A0026CEEF /* BatteryData.swift in Sources */,
 				CF0D2F3C1D95A4A900E5A304 /* VehicleState.swift in Sources */,
 				CF1BD5971DD5051600E4C493 /* SetTemperatureCommandOptions.swift in Sources */,
