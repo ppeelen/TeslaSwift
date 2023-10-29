@@ -31,6 +31,7 @@ enum Endpoint {
 	case wakeUp(vehicleID: String)
 	case command(vehicleID: String, command: VehicleCommand)
     case products
+    case chargeHistory(vehicleID: String)
     case getEnergySiteStatus(siteID: String)
     case getEnergySiteLiveStatus(siteID: String)
     case getEnergySiteInfo(siteID: String)
@@ -84,7 +85,9 @@ extension Endpoint {
                 return "/api/1/vehicles/\(vehicleID)/\(command.path())"
             case .products:
                 return "/api/1/products"
-            
+            case let .chargeHistory(vehicleID):
+                return "/api/1/vehicles/\(vehicleID)/charge_history"
+
             // Energy Data
             case .getEnergySiteStatus(let siteID):
                 return "/api/1/energy_sites/\(siteID)/site_status"
@@ -105,7 +108,7 @@ extension Endpoint {
 	
 	var method: String {
 		switch self {
-            case .revoke, .oAuth2Token, .oAuth2TokenCN, .wakeUp, .partnerAccounts, .command:
+            case .revoke, .oAuth2Token, .oAuth2TokenCN, .wakeUp, .partnerAccounts, .chargeHistory, .command:
                 return "POST"
         case .vehicles, .vehicleSummary, .mobileAccess, .allStates, .chargeState, .climateState, .driveState, .guiSettings, .vehicleState, .vehicleConfig, .nearbyChargingSites, .oAuth2Authorization, .oAuth2revoke, .oAuth2AuthorizationCN, .oAuth2revokeCN, .products, .getEnergySiteStatus, .getEnergySiteLiveStatus, .getEnergySiteInfo, .getEnergySiteHistory, .getBatteryStatus, .getBatteryData, .getBatteryPowerHistory:
                 return "GET"

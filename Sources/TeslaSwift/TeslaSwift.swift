@@ -304,7 +304,19 @@ extension TeslaSwift {
     public func getVehicle(_ vehicle: Vehicle) async throws -> Vehicle {
         return try await getVehicle(vehicle.id!)
     }
-	
+
+    /**
+     Wakes up the vehicle
+
+     - returns: The current Vehicle
+     */
+    public func wakeUp(_ vehicle: Vehicle) async throws -> Vehicle {
+        _ = try await checkAuthentication()
+        let vehicleID = vehicle.id!
+        let response: Response<Vehicle> = try await request(.wakeUp(vehicleID: vehicleID), body: nullBody)
+        return response.response
+    }
+
     /**
      Fetches the vehicle data
      
@@ -342,17 +354,18 @@ extension TeslaSwift {
         return response.response
     }
 
-	/**
-	Wakes up the vehicle
-	
-	- returns: The current Vehicle
-	*/
-    public func wakeUp(_ vehicle: Vehicle) async throws -> Vehicle {
+    /**
+     Fetches the charge history for a vehicle
+
+     - parameter vehicle: the vehicle to get charge history
+     - returns: The charge history
+     */
+    public func getChargeHistory(_ vehicle: Vehicle) async throws -> ChargeHistory {
         _ = try await checkAuthentication()
         let vehicleID = vehicle.id!
-        let response: Response<Vehicle> = try await request(.wakeUp(vehicleID: vehicleID), body: nullBody)
+        let response: Response<ChargeHistory> = try await request(.chargeHistory(vehicleID: vehicleID), body: nullBody)
         return response.response
-	}
+    }
 	
 	/**
 	Sends a command to the vehicle
@@ -610,7 +623,8 @@ extension TeslaSwift {
 		request.httpMethod = endpoint.method
 		
 		request.setValue("TeslaSwift", forHTTPHeaderField: "User-Agent")
-		
+        request.setValue("TeslaApp/4.9.2", forHTTPHeaderField: "x-tesla-user-agent")
+
 		if let token = self.token?.accessToken {
 			request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         } else if let token = self.partnerToken?.accessToken {
