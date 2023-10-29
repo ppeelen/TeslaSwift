@@ -18,9 +18,9 @@ class LoginViewController: UIViewController {
     @IBAction func webLoginAction(_ sender: AnyObject) {
         let (webloginViewController, result) = api.authenticateWeb()
 
-        guard let safeWebloginViewController = webloginViewController else { return }
+        guard let webloginViewController else { return }
 
-        self.present(safeWebloginViewController, animated: true, completion: nil)
+        self.present(webloginViewController, animated: true, completion: nil)
 
         Task { @MainActor in
             do {

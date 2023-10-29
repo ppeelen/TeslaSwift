@@ -1,9 +1,8 @@
 # TeslaSwift
-Swift library to access Tesla API based on [Tesla JSON API (Unofficial)](https://tesla-api.timdorr.com)
+Swift library to access Tesla API based on [Tesla JSON API (Unofficial)](https://tesla-api.timdorr.com) and [Tesla Fleet API](https://developer.tesla.com/docs/fleet-api)
 
-[![Swift](https://img.shields.io/badge/Swift-5.7-orange.svg?style=flat)](https://swift.org)
+[![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg?style=flat)](https://swift.org)
 [![Build Status](https://travis-ci.org/jonasman/TeslaSwift.svg?branch=master)](https://travis-ci.org/jonasman/TeslaSwift)
-[![TeslaSwift](https://img.shields.io/cocoapods/v/TeslaSwift.svg)](https://github.com/jonasman/TeslaSwift)
 
 ## Installation
 
@@ -12,11 +11,33 @@ Swift library to access Tesla API based on [Tesla JSON API (Unofficial)](https:/
 You can use [Swift Package Manager](https://swift.org/package-manager/) and specify a dependency in `Package.swift` by adding this or adding the dependency to Xcode:
 
 ```swift
-.Package(url: "https://github.com/jonasman/TeslaSwift.git", majorVersion: 8)
+.Package(url: "https://github.com/jonasman/TeslaSwift.git", majorVersion: 9)
 ```
 
 There are also extensions for Combine `TeslaSwiftCombine`
 The Streaming extensions are: `TeslaSwiftStreaming`, Combine `TeslaSwiftStreamingCombine` 
+
+## Tesla API
+There are 2 Tesla APIs available:
+1. The old ownersAPI
+2. The new FleetAPI
+
+You can choose any of them. If you want to use FleetAPI, initialize the library with a region, clientId, clientSectret and redirectURI
+
+## App registration for the FleetAPI
+To use the new FleetAPI, you will need to register your app.
+
+Follow the steps on the [official documentation](https://developer.tesla.com/docs/fleet-api#setup):
+1. Create a private/public key and upload the public key to a website
+2. Make a new app at [Tesla Developer](https://developer.tesla.com/dashboard)
+3. Get a partner token (using this Library)
+4. Register your app (using this Library)
+
+This library helps you get a partner token and register your app with 2 APIs:
+```swift
+getPartnerToken(code: String)
+registerApp(domain: String)
+```
 
 ## Usage
 
@@ -42,14 +63,14 @@ Add the extension modules if needed (with the previous line)
 import TeslaSwiftCombine
 ```
 
-
 Perform an authentication with your MyTesla credentials using the web oAuth2 flow with MFA support: 
 
 ```swift
-let api = TeslaSwift()
-let (webloginViewController, result) = await api.authenticate()
-guard let safeWebLoginViewController = webloginViewController else { return }
-present(safeWebLoginViewController, animated: true, completion: nil)
+let teslaAPI = ...
+let api = TeslaSwift(teslaAPI: teslaAPI)
+let (webloginViewController, result) = api.authenticateWeb()
+guard let webloginViewController else { return }
+present(webloginViewController, animated: true, completion: nil)
 Task { @MainActor in
         do {
              _ = try await result()
@@ -67,7 +88,8 @@ import TeslaSwift
 import SwiftUI
 
 struct TeslaWebLogin: UIViewControllerRepresentable {
-    let api = TeslaSwift()    
+    let teslaAPI = ...
+    let api = TeslaSwift(teslaAPI: teslaAPI)    
     
     func makeUIViewController(context: Context) -> TeslaWebLoginViewController {
         let (webloginViewController, result) = api.authenticateWeb()        
@@ -115,7 +137,8 @@ After authentication, store the AuthToken in a safe place.
 The next time the app starts-up you can reuse the token:
 
 ```swift
-let api = TeslaSwift()
+let teslaAPI = ...
+let api = TeslaSwift(teslaAPI: teslaAPI)
 api.reuse(token: previousToken)
 
 ```

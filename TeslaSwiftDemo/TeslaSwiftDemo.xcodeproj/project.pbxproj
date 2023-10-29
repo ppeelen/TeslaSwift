@@ -92,6 +92,7 @@
 		CFAE27901F76644400D28079 /* Codable+JSONString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE278E1F76644300D28079 /* Codable+JSONString.swift */; };
 		CFB5D7B81E66088F003EA1EF /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB5D7B61E66088F003EA1EF /* ErrorMessage.swift */; };
 		CFC819A41DBBA2EA00A8E47B /* VehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC819A31DBBA2EA00A8E47B /* VehicleViewController.swift */; };
+		CFCA83852AEEC55F001A1B0C /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCA83842AEEC55F001A1B0C /* Partner.swift */; };
 		CFD2E7C51C8A13D60005E882 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2E7C41C8A13D60005E882 /* AppDelegate.swift */; };
 		CFD2E7C71C8A13D60005E882 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2E7C61C8A13D60005E882 /* FirstViewController.swift */; };
 		CFD2E7C91C8A13D60005E882 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2E7C81C8A13D60005E882 /* SecondViewController.swift */; };
@@ -219,6 +220,7 @@
 		CFAE278E1F76644300D28079 /* Codable+JSONString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+JSONString.swift"; sourceTree = "<group>"; };
 		CFB5D7B61E66088F003EA1EF /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		CFC819A31DBBA2EA00A8E47B /* VehicleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleViewController.swift; sourceTree = "<group>"; };
+		CFCA83842AEEC55F001A1B0C /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
 		CFD2E7C11C8A13D60005E882 /* TeslaSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeslaSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD2E7C41C8A13D60005E882 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFD2E7C61C8A13D60005E882 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				CF0D2F191D95A4A900E5A304 /* Authentication.swift */,
 				CF1BD5921DD5041800E4C493 /* ChargeLimitPercentageCommandOptions.swift */,
 				CF0D2F1A1D95A4A900E5A304 /* ChargeState.swift */,
+				CFCA83842AEEC55F001A1B0C /* Partner.swift */,
 				CF0D2F1B1D95A4A900E5A304 /* ClimateState.swift */,
 				CFAE278E1F76644300D28079 /* Codable+JSONString.swift */,
 				CF0D2F1C1D95A4A900E5A304 /* CommandResponse.swift */,
@@ -702,6 +705,7 @@
 				708FBA5E274EA1740026CEEF /* EnergySite.swift in Sources */,
 				708FBA46274D75E70026CEEF /* Product.swift in Sources */,
 				CF3F851B21C51FC30086B564 /* SpeedLimitOptions.swift in Sources */,
+				CFCA83852AEEC55F001A1B0C /* Partner.swift in Sources */,
 				CF67D223272D49D100738CB3 /* ChargeAmpsCommandOptions.swift in Sources */,
 				1AA73E8A235B3A960088D66A /* WindowControlCommandOptions.swift in Sources */,
 				650A507E218ABAEF0068EC13 /* SoftwareUpdate.swift in Sources */,

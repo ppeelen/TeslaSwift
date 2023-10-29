@@ -21,20 +21,95 @@ public enum TeslaError: Error, Equatable {
     case internalError
 }
 
-let ErrorInfo = "ErrorInfo"
+public enum TeslaAPI {
+
+    public enum Region: String {
+        case northAmericaAsiaPacific = "https://fleet-api.prd.na.vn.cloud.tesla.com"
+        case europeMiddleEastAfrica = "https://fleet-api.prd.eu.vn.cloud.tesla.com"
+    }
+
+    case ownerAPI
+    case fleetAPI(region: Region, clientID: String, clientSecret: String, redirectURI: String)
+
+    var url: String {
+        switch self {
+            case .ownerAPI: return "https://owner-api.teslamotors.com"
+            case let .fleetAPI(region: region, clientID: _, clientSecret: _, redirectURI: _): return region.rawValue
+        }
+    }
+}
+
 private var nullBody = ""
 
 open class TeslaSwift {
     open var debuggingEnabled = false
 
     open fileprivate(set) var token: AuthToken?
+    open fileprivate(set) var partnerToken: AuthToken?
 
     open fileprivate(set) var email: String?
     fileprivate var password: String?
 
-    public init() { }
+    let teslaAPI: TeslaAPI
+
+    public init(teslaAPI: TeslaAPI) {
+        self.teslaAPI = teslaAPI
+    }
 }
 
+//MARK: Partner APIs
+extension TeslaSwift {
+
+    /**
+     Retrieves a partner Auth token
+
+     This is not to be used in client apps, but only to help register your Tesla app
+
+     - returns: An Auth token
+     */
+    func getPartnerToken(code: String) async throws -> AuthToken {
+
+        let body = AuthTokenRequestWeb(teslaAPI: teslaAPI, grantType: .clientCredentials)
+
+        do {
+            let token: AuthToken = try await request(.oAuth2Token, body: body)
+            self.partnerToken = token
+            return token
+        } catch let error {
+            if case let TeslaError.networkError(error: internalError) = error {
+                if internalError.code == 302 || internalError.code == 403 {
+                    let token: AuthToken = try await request(.oAuth2TokenCN, body: body)
+                    self.partnerToken = token
+                    return token
+                } else if internalError.code == 401 {
+                    throw TeslaError.authenticationFailed
+                } else {
+                    throw error
+                }
+            } else {
+                throw error
+            }
+        }
+    }
+
+    /**
+     Registers the app with Tesla
+
+     This is not to be used in client apps, but only to help register your Tesla app
+
+     - parameter domain: The domain where your public key is hosted
+     - returns: The asociated public key with this app and a few more details about the app
+     */
+    func registerApp(domain: String) async throws -> PartnerResponse {
+
+        let body = PartnerBody(domain: domain)
+
+        let response: PartnerResponse = try await request(.partnerAccounts, body: body)
+        return response
+    }
+}
+
+//MARK: Authentication APIs
 extension TeslaSwift {
 
     public var isAuthenticated: Bool {
@@ -53,9 +128,9 @@ extension TeslaSwift {
      */
     public func authenticateWeb() -> (TeslaWebLoginViewController?, () async throws -> AuthToken) {
 
-        let codeRequest = AuthCodeRequest()
+        let codeRequest = AuthCodeRequest(teslaAPI: teslaAPI)
         let endpoint = Endpoint.oAuth2Authorization(auth: codeRequest)
-        var urlComponents = URLComponents(string: endpoint.baseURL())
+        var urlComponents = URLComponents(string: endpoint.baseURL(teslaAPI: teslaAPI))
         urlComponents?.path = endpoint.path
         urlComponents?.queryItems = endpoint.queryParameters
 
@@ -69,15 +144,15 @@ extension TeslaSwift {
         let teslaWebLoginViewController = TeslaWebLoginViewController(url: safeUrlComponents.url!)
 
         func result() async throws -> AuthToken {
-                let url = try await teslaWebLoginViewController.result()
-                let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
-                if let queryItems = urlComponents?.queryItems {
-                    for queryItem in queryItems {
-                        if queryItem.name == "code", let code = queryItem.value {
-                            return try await self.getAuthenticationTokenForWeb(code: code)
-                        }
+            let url = try await teslaWebLoginViewController.result()
+            let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
+            if let queryItems = urlComponents?.queryItems {
+                for queryItem in queryItems {
+                    if queryItem.name == "code", let code = queryItem.value {
+                        return try await self.getAuthenticationTokenForWeb(code: code)
                     }
                 }
+            }
             throw TeslaError.authenticationFailed
         }
         return (teslaWebLoginViewController, result)
@@ -86,7 +161,7 @@ extension TeslaSwift {
 
     private func getAuthenticationTokenForWeb(code: String) async throws -> AuthToken {
 
-        let body = AuthTokenRequestWeb(code: code)
+        let body = AuthTokenRequestWeb(teslaAPI: teslaAPI, code: code)
 
         do {
             let token: AuthToken = try await request(.oAuth2Token, body: body)
@@ -110,13 +185,13 @@ extension TeslaSwift {
     }
 
     /**
-     Performs the token refresh with the Tesla API for Web logins
+     Performs the token refresh with the Tesla API
 
      - returns: The AuthToken.
      */
-    public func refreshWebToken() async throws -> AuthToken {
+    public func refreshToken() async throws -> AuthToken {
         guard let token = self.token else { throw TeslaError.noTokenToRefresh }
-        let body = AuthTokenRequestWeb(grantType: .refreshToken, refreshToken: token.refreshToken)
+        let body = AuthTokenRequestWeb(teslaAPI: teslaAPI, grantType: .refreshToken, refreshToken: token.refreshToken)
 
         do {
             let authToken: AuthToken = try await request(.oAuth2Token, body: body)
@@ -140,26 +215,26 @@ extension TeslaSwift {
         }
     }
 
-	/**
-	Use this method to reuse a previous authentication token
-	
-	This method is useful if your app wants to ask the user for credentials once and reuse the token skipping authentication
-	If the token is invalid a new authentication will be required
-	
-	- parameter token:      The previous token
-	- parameter email:      Email is required for streaming
-	*/
-	public func reuse(token: AuthToken, email: String? = nil) {
-		self.token = token
-		self.email = email
-	}
+    /**
+     Use this method to reuse a previous authentication token
+
+     This method is useful if your app wants to ask the user for credentials once and reuse the token skipping authentication
+     If the token is invalid a new authentication will be required
+
+     - parameter token:      The previous token
+     - parameter email:      Email is required for streaming
+     */
+    public func reuse(token: AuthToken, email: String? = nil) {
+        self.token = token
+        self.email = email
+    }
 
     /**
      Revokes the stored token. Not working
 
      - returns: The token revoke state.
      */
-    public func revokeWeb() async throws -> Bool {
+    public func revokeToken() async throws -> Bool {
         guard let accessToken = self.token?.accessToken else {
             cleanToken()
             return false
@@ -172,18 +247,22 @@ extension TeslaSwift {
         return response.response
     }
 
-	/**
-	Removes all the information related to the previous authentication
-	
-	*/
-	public func logout() {
-		email = nil
-		password = nil
-		cleanToken()
+    /**
+     Removes all the information related to the previous authentication
+
+     */
+    public func logout() {
+        email = nil
+        password = nil
+        cleanToken()
         #if canImport(WebKit) && canImport(UIKit)
         TeslaWebLoginViewController.removeCookies()
         #endif
-	}
+    }
+}
+
+//MARK: Control APIs
+extension TeslaSwift {
 	/**
 	Fetchs the list of your vehicles including not yet delivered ones
 	
@@ -429,6 +508,7 @@ extension TeslaSwift {
     }
 }
 
+//MARK: Helpers
 extension TeslaSwift {
 
     func checkToken() -> Bool {
@@ -441,6 +521,7 @@ extension TeslaSwift {
 
     func cleanToken() {
         token = nil
+        partnerToken = nil
     }
 
     func checkAuthentication() async throws -> AuthToken {
@@ -450,7 +531,7 @@ extension TeslaSwift {
             return token
         } else {
             if token.refreshToken != nil {
-                return try await refreshWebToken()
+                return try await refreshToken()
             } else {
                 throw TeslaError.authenticationRequired
             }
@@ -514,7 +595,7 @@ extension TeslaSwift {
             } else if httpResponse.allHeaderFields["Www-Authenticate"] != nil, httpResponse.statusCode == 401 {
                 throw TeslaError.authenticationFailed
             } else if let mapped = try? teslaJSONDecoder.decode(ErrorMessage.self, from: data) {
-                throw TeslaError.networkError(error: NSError(domain: "TeslaError", code: httpResponse.statusCode, userInfo: [ErrorInfo: mapped]))
+                throw TeslaError.networkError(error: NSError(domain: "TeslaError", code: httpResponse.statusCode, userInfo: ["ErrorInfo": mapped]))
             } else {
                 throw TeslaError.networkError(error: NSError(domain: "TeslaError", code: httpResponse.statusCode, userInfo: nil))
             }
@@ -522,7 +603,7 @@ extension TeslaSwift {
     }
 
     func prepareRequest<BodyType: Encodable>(_ endpoint: Endpoint, body: BodyType) -> URLRequest {
-        var urlComponents = URLComponents(url: URL(string: endpoint.baseURL())!, resolvingAgainstBaseURL: true)
+        var urlComponents = URLComponents(url: URL(string: endpoint.baseURL(teslaAPI: teslaAPI))!, resolvingAgainstBaseURL: true)
         urlComponents?.path = endpoint.path
         urlComponents?.queryItems = endpoint.queryParameters
         var request = URLRequest(url: urlComponents!.url!)
@@ -532,8 +613,10 @@ extension TeslaSwift {
 		
 		if let token = self.token?.accessToken {
 			request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-		}
-		
+        } else if let token = self.partnerToken?.accessToken {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+
 		if let body = body as? String, body == nullBody {
             // Shrug
 		} else {

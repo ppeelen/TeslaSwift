@@ -9,15 +9,22 @@
 import UIKit
 import TeslaSwift
 
+// Change this!
+let clientID = "ABC"
+let clientSecret = "DEF"
+let redirectURI = "teslaswift://teslaswift"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	var api = TeslaSwift()
+    var api: TeslaSwift!
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 
+        let teslaAPI = TeslaAPI.fleetAPI(region: .europeMiddleEastAfrica, clientID: clientID, clientSecret: clientSecret, redirectURI: redirectURI)
+        api = TeslaSwift(teslaAPI: teslaAPI)
 		api.debuggingEnabled = true
 		
 		if let jsonString = UserDefaults.standard.object(forKey: "tesla.token") as? String,
@@ -54,7 +61,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
-
-
 }
-

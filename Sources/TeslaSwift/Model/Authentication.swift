@@ -9,11 +9,7 @@
 import Foundation
 import CryptoKit
 
-private let oAuthClientID: String = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef21067963841234334232123232323232"
-private let oAuthWebClientID: String = "ownerapi"
-private let oAuthClientSecret: String = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3"
-private let oAuthScope: String = "openid email offline_access"
-private let oAuthRedirectURI: String = "https://auth.tesla.com/void/callback"
+private let oAuthCodeVerifier: String = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef21067963841234334232123232323232"
 
 open class AuthToken: Codable {
 	
@@ -63,11 +59,12 @@ class AuthTokenRequestWeb: Encodable {
     enum GrantType: String, Encodable {
         case refreshToken = "refresh_token"
         case authorizationCode = "authorization_code"
+        case clientCredentials = "client_credentials"
     }
 
     var grantType: GrantType
-    var clientID: String = oAuthWebClientID
-    var clientSecret: String = oAuthClientSecret
+    var clientID: String
+    var clientSecret: String
 
     var codeVerifier: String?
     var code: String?
@@ -75,21 +72,28 @@ class AuthTokenRequestWeb: Encodable {
 
     var refreshToken: String?
     var scope: String?
+    var audience: String?
 
-    init(grantType: GrantType = .authorizationCode, code: String? = nil, refreshToken: String? = nil) {
-        if grantType == .authorizationCode {
-            self.codeVerifier = oAuthClientID
-            self.code = code
-            self.redirectURI = oAuthRedirectURI
-        } else if grantType == .refreshToken {
-            self.refreshToken = refreshToken
-            self.scope = oAuthScope
+    init(teslaAPI: TeslaAPI, grantType: GrantType = .authorizationCode, code: String? = nil, refreshToken: String? = nil) {
+        switch grantType {
+            case .authorizationCode:
+                self.codeVerifier = oAuthCodeVerifier
+                self.redirectURI = teslaAPI.redirectURI
+                self.audience = teslaAPI.region?.rawValue
+                self.code = code
+            case .refreshToken:
+                self.refreshToken = refreshToken
+                self.scope = teslaAPI.scope
+            case .clientCredentials:
+                self.scope = teslaAPI.scope
+                self.audience = teslaAPI.region?.rawValue
         }
+        self.clientID = teslaAPI.clientID
+        self.clientSecret = teslaAPI.clientSecret
         self.grantType = grantType
     }
 
     // MARK: Codable protocol
-
     enum CodingKeys: String, CodingKey {
         typealias RawValue = String
 
@@ -107,16 +111,20 @@ class AuthTokenRequestWeb: Encodable {
 class AuthCodeRequest: Encodable {
 
     var responseType: String = "code"
-    var clientID = oAuthWebClientID
-    var clientSecret = oAuthClientSecret
-    var redirectURI = oAuthRedirectURI
-    var scope = oAuthScope
+    var clientID: String
+    var clientSecret: String
+    var redirectURI: String
+    var scope: String
     let codeChallenge: String
     var codeChallengeMethod = "S256"
     var state = "teslaSwift"
 
-    init() {
-        self.codeChallenge = oAuthClientID.challenge
+    init(teslaAPI: TeslaAPI) {
+        self.clientID = teslaAPI.clientID
+        self.clientSecret = teslaAPI.clientSecret
+        self.redirectURI = teslaAPI.redirectURI
+        self.scope = teslaAPI.scope
+        self.codeChallenge = oAuthCodeVerifier.challenge
     }
 
     // MARK: Codable protocol
@@ -160,5 +168,42 @@ extension String {
         let inputData = Data(self.utf8)
         let hashed = SHA256.hash(data: inputData)
         return Data(hashed)
+    }
+}
+
+extension TeslaAPI {
+    var region: Region? {
+        switch self {
+            case .ownerAPI: return nil
+            case let .fleetAPI(region: region, clientID: _, clientSecret: _, redirectURI: _): return region
+        }
+    }
+
+    var clientID: String {
+        switch self {
+            case .ownerAPI: return "ownerapi"
+            case let .fleetAPI(region: _, clientID: clientID, clientSecret: _, redirectURI: _): return clientID
+        }
+    }
+
+    var clientSecret: String {
+        switch self {
+            case .ownerAPI: return "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3"
+            case let .fleetAPI(region: _, clientID: _, clientSecret: clientSecret, redirectURI: _): return clientSecret
+        }
+    }
+
+    var redirectURI: String {
+        switch self {
+            case .ownerAPI: return "https://auth.tesla.com/void/callback"
+            case let .fleetAPI(region: _, clientID: _, clientSecret: _, redirectURI: redirectURI): return redirectURI
+        }
+    }
+
+    var scope: String {
+        switch self {
+            case .ownerAPI: return "openid email offline_access"
+            case .fleetAPI: return "openid user_data vehicle_device_data offline_access vehicle_cmds vehicle_charging_cmds energy_device_data energy_cmds"
+        }
     }
 }

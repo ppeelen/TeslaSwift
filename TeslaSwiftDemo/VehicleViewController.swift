@@ -75,7 +75,7 @@ class VehicleViewController: UIViewController {
     @IBAction func refreshToken(_ sender: Any) {
         Task { @MainActor in
             do {
-                let token = try await api.refreshWebToken()
+                let token = try await api.refreshToken()
                 self.textView.text = "New access Token:\n \(token)"
             } catch {
                 self.textView.text = "Refresh Token:\n CATCH"
@@ -97,7 +97,7 @@ class VehicleViewController: UIViewController {
     @IBAction func revokeToken(_ sender: Any) {
         Task { @MainActor in
             do {
-                let status = try await api.revokeWeb()
+                let status = try await api.revokeToken()
                 self.textView.text = "Revoked: \(status)"
             } catch {
                 self.textView.text = "Revoke Token:\n CATCH"
