@@ -19,8 +19,8 @@ The Streaming extensions are: `TeslaSwiftStreaming`, Combine `TeslaSwiftStreamin
 
 ## Tesla API
 There are 2 Tesla APIs available:
-1. The old ownersAPI
-2. The new FleetAPI
+1. The old owner API
+2. The new Fleet API
 
 You can choose any of them. If you want to use FleetAPI, initialize the library with a region, clientId, clientSectret and redirectURI
 
