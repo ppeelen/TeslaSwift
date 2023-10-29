@@ -94,6 +94,7 @@
 		CFC819A41DBBA2EA00A8E47B /* VehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC819A31DBBA2EA00A8E47B /* VehicleViewController.swift */; };
 		CFCA83852AEEC55F001A1B0C /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCA83842AEEC55F001A1B0C /* Partner.swift */; };
 		CFCA83872AEEFF08001A1B0C /* ChargeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCA83862AEEFF08001A1B0C /* ChargeHistory.swift */; };
+		CFCA83892AEF09E1001A1B0C /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCA83882AEF09E1001A1B0C /* Me.swift */; };
 		CFD2E7C51C8A13D60005E882 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2E7C41C8A13D60005E882 /* AppDelegate.swift */; };
 		CFD2E7C71C8A13D60005E882 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2E7C61C8A13D60005E882 /* FirstViewController.swift */; };
 		CFD2E7C91C8A13D60005E882 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2E7C81C8A13D60005E882 /* SecondViewController.swift */; };
@@ -223,6 +224,7 @@
 		CFC819A31DBBA2EA00A8E47B /* VehicleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleViewController.swift; sourceTree = "<group>"; };
 		CFCA83842AEEC55F001A1B0C /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
 		CFCA83862AEEFF08001A1B0C /* ChargeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeHistory.swift; sourceTree = "<group>"; };
+		CFCA83882AEF09E1001A1B0C /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		CFD2E7C11C8A13D60005E882 /* TeslaSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeslaSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD2E7C41C8A13D60005E882 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFD2E7C61C8A13D60005E882 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				CF0D2F1E1D95A4A900E5A304 /* GenericResponse.swift */,
 				CF0D2F1F1D95A4A900E5A304 /* GuiSettings.swift */,
 				1AA73E8B235B3FA40088D66A /* MaxDefrostCommandOptions.swift */,
+				CFCA83882AEF09E1001A1B0C /* Me.swift */,
 				65F055172173DB3D00BE3BE5 /* ShareToVehicleOptions.swift */,
 				170D32D222D0EBCD00B6A51A /* NearbyChargingSites.swift */,
 				1AA73E85235B37560088D66A /* HomeLinkCommandOptions.swift */,
@@ -669,6 +672,7 @@
 				1AA73E87235B37560088D66A /* HomeLinkCommandOptions.swift in Sources */,
 				708FBA49274E9CE40026CEEF /* EnergySiteStatus.swift in Sources */,
 				CF0D2F381D95A4A900E5A304 /* Vehicle.swift in Sources */,
+				CFCA83892AEF09E1001A1B0C /* Me.swift in Sources */,
 				CF0D2F261D95A4A900E5A304 /* Authentication.swift in Sources */,
 				CF5FF50E21AADC3E007B6306 /* ShareToVehicleOptions.swift in Sources */,
 				CF0D2F301D95A4A900E5A304 /* GenericResponse.swift in Sources */,

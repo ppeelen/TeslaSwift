@@ -261,6 +261,20 @@ extension TeslaSwift {
     }
 }
 
+//MARK: User APIs
+extension TeslaSwift {
+    /**
+     Fetchs the list of your vehicles including not yet delivered ones
+
+     - returns: An array of Vehicles.
+     */
+    public func me() async throws -> Me {
+        _ = try await checkAuthentication()
+        let response: Response<Me> = try await request(.me, body: nullBody)
+        return response.response
+    }
+}
+
 //MARK: Control APIs
 extension TeslaSwift {
 	/**
