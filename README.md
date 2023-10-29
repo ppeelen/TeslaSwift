@@ -15,6 +15,7 @@ You can use [Swift Package Manager](https://swift.org/package-manager/) and spec
 ```
 
 There are also extensions for Combine `TeslaSwiftCombine`
+
 The Streaming extensions are: `TeslaSwiftStreaming`, Combine `TeslaSwiftStreamingCombine` 
 
 ## Tesla API
@@ -22,10 +23,10 @@ There are 2 Tesla APIs available:
 1. The old owner API
 2. The new Fleet API
 
-You can choose any of them. If you want to use FleetAPI, initialize the library with a region, clientId, clientSectret and redirectURI
+You can choose any of them. If you want to use FleetAPI, initialize the library with a `region`, `clientId`, `clientSecret` and `redirectURI`
 
-## App registration for the FleetAPI
-To use the new FleetAPI, you will need to register your app.
+## App registration for the Fleet API
+To use the new Fleet API, you will need to register your app.
 
 Follow the steps on the [official documentation](https://developer.tesla.com/docs/fleet-api#setup):
 1. Create a private/public key and upload the public key to a website
