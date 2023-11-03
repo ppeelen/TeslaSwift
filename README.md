@@ -145,7 +145,7 @@ api.reuse(token: previousToken)
 ```
 
 ## Vehicle data
-Example on how to get a list of vehicles with promiseKit
+Example on how to get a list of vehicles
 
 ```swift
 
@@ -214,6 +214,7 @@ public let teslaJSONDecoder: JSONDecoder
 ## Options
 
 You can enable debugging by setting: `api.debuggingEnabled = true`
+Debug logs use Unified Logging and can be found by filtering for `subsystem: Tesla Swift`
 
 ## Other Features
 
