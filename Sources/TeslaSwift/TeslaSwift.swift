@@ -23,7 +23,7 @@ public enum TeslaError: Error, Equatable {
 
 public enum TeslaAPI {
 
-    public enum Region: String {
+    public enum Region: String, Codable {
         case northAmericaAsiaPacific = "https://fleet-api.prd.na.vn.cloud.tesla.com"
         case europeMiddleEastAfrica = "https://fleet-api.prd.eu.vn.cloud.tesla.com"
     }
