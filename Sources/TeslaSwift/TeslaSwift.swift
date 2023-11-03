@@ -40,8 +40,6 @@ public enum TeslaAPI {
     }
 }
 
-private var nullBody = ""
-
 open class TeslaSwift {
     open var debuggingEnabled = false
 
@@ -246,7 +244,7 @@ extension TeslaSwift {
         _ = try await checkAuthentication()
         self.cleanToken()
 
-        let response: BoolResponse = try await request(.oAuth2revoke(token: accessToken), body: nullBody)
+        let response: BoolResponse = try await request(.oAuth2revoke(token: accessToken))
         return response.response
     }
 
@@ -273,7 +271,7 @@ extension TeslaSwift {
      */
     public func me() async throws -> Me {
         _ = try await checkAuthentication()
-        let response: Response<Me> = try await request(.me, body: nullBody)
+        let response: Response<Me> = try await request(.me)
         return response.response
     }
 
@@ -284,7 +282,7 @@ extension TeslaSwift {
      */
     public func region() async throws -> Region {
         _ = try await checkAuthentication()
-        let response: Response<Region> = try await request(.region, body: nullBody)
+        let response: Response<Region> = try await request(.region)
         return response.response
     }
 }
@@ -298,7 +296,7 @@ extension TeslaSwift {
 	*/
     public func getVehicles() async throws -> [Vehicle] {
         _ = try await checkAuthentication()
-        let response: ArrayResponse<Vehicle> = try await request(.vehicles, body: nullBody)
+        let response: ArrayResponse<Vehicle> = try await request(.vehicles)
         return response.response
 	}
     
@@ -309,7 +307,7 @@ extension TeslaSwift {
     */
     public func getProducts() async throws -> [Product] {
         _ = try await checkAuthentication()
-        let response: ArrayResponse<Product> = try await request(.products, body: nullBody)
+        let response: ArrayResponse<Product> = try await request(.products)
         return response.response
     }
     
@@ -320,7 +318,7 @@ extension TeslaSwift {
     */
     public func getVehicle(_ vehicleID: String) async throws -> Vehicle {
         _ = try await checkAuthentication()
-        let response: Response<Vehicle> = try await request(.vehicleSummary(vehicleID: vehicleID), body: nullBody)
+        let response: Response<Vehicle> = try await request(.vehicleSummary(vehicleID: vehicleID))
         return response.response
     }
     
@@ -341,7 +339,7 @@ extension TeslaSwift {
     public func wakeUp(_ vehicle: Vehicle) async throws -> Vehicle {
         _ = try await checkAuthentication()
         let vehicleID = vehicle.id!
-        let response: Response<Vehicle> = try await request(.wakeUp(vehicleID: vehicleID), body: nullBody)
+        let response: Response<Vehicle> = try await request(.wakeUp(vehicleID: vehicleID))
         return response.response
     }
 
@@ -353,7 +351,7 @@ extension TeslaSwift {
     public func getAllData(_ vehicle: Vehicle) async throws -> VehicleExtended {
         _ = try await checkAuthentication()
         let vehicleID = vehicle.id!
-        let response: Response<VehicleExtended> = try await request(.allStates(vehicleID: vehicleID), body: nullBody)
+        let response: Response<VehicleExtended> = try await request(.allStates(vehicleID: vehicleID))
         return response.response
 	}
 	
@@ -365,7 +363,7 @@ extension TeslaSwift {
     public func getVehicleMobileAccessState(_ vehicle: Vehicle) async throws -> Bool {
         _ = try await checkAuthentication()
         let vehicleID = vehicle.id!
-        let response: BoolResponse = try await request(.mobileAccess(vehicleID: vehicleID), body: nullBody)
+        let response: BoolResponse = try await request(.mobileAccess(vehicleID: vehicleID))
         return response.response
     }
 
@@ -378,7 +376,7 @@ extension TeslaSwift {
     public func getNearbyChargingSites(_ vehicle: Vehicle) async throws -> NearbyChargingSites {
         _ = try await checkAuthentication()
         let vehicleID = vehicle.id!
-        let response: Response<NearbyChargingSites> = try await request(.nearbyChargingSites(vehicleID: vehicleID), body: nullBody)
+        let response: Response<NearbyChargingSites> = try await request(.nearbyChargingSites(vehicleID: vehicleID))
         return response.response
     }
 
@@ -391,7 +389,7 @@ extension TeslaSwift {
     public func getChargeHistory(_ vehicle: Vehicle) async throws -> ChargeHistory {
         _ = try await checkAuthentication()
         let vehicleID = vehicle.id!
-        let response: Response<ChargeHistory> = try await request(.chargeHistory(vehicleID: vehicleID), body: nullBody)
+        let response: Response<ChargeHistory> = try await request(.chargeHistory(vehicleID: vehicleID))
         return response.response
     }
 	
@@ -466,8 +464,7 @@ extension TeslaSwift {
                 let body = ChargeAmpsCommandOptions(amps: amps)
                 return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
             default:
-                let body = nullBody
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command))
         }
 	}
 
@@ -478,7 +475,7 @@ extension TeslaSwift {
     */
     public func getEnergySiteStatus(siteID: String) async throws -> EnergySiteStatus {
         _ = try await checkAuthentication()
-        let response: Response<EnergySiteStatus> = try await request(.getEnergySiteStatus(siteID: siteID), body: nullBody)
+        let response: Response<EnergySiteStatus> = try await request(.getEnergySiteStatus(siteID: siteID))
         return response.response
     }
     
@@ -489,7 +486,7 @@ extension TeslaSwift {
     */
     public func getEnergySiteLiveStatus(siteID: String) async throws -> EnergySiteLiveStatus {
         _ = try await checkAuthentication()
-        let response: Response<EnergySiteLiveStatus> = try await request(.getEnergySiteLiveStatus(siteID: siteID), body: nullBody)
+        let response: Response<EnergySiteLiveStatus> = try await request(.getEnergySiteLiveStatus(siteID: siteID))
         return response.response
     }
     
@@ -500,7 +497,7 @@ extension TeslaSwift {
     */
     public func getEnergySiteInfo(siteID: String) async throws -> EnergySiteInfo {
         _ = try await checkAuthentication()
-        let response: Response<EnergySiteInfo> = try await request(.getEnergySiteInfo(siteID: siteID), body: nullBody)
+        let response: Response<EnergySiteInfo> = try await request(.getEnergySiteInfo(siteID: siteID))
         return response.response
     }
     
@@ -511,7 +508,7 @@ extension TeslaSwift {
     */
     public func getEnergySiteHistory(siteID: String, period: EnergySiteHistory.Period) async throws  -> EnergySiteHistory {
         _ = try await checkAuthentication()
-        let response: Response<EnergySiteHistory> = try await request(.getEnergySiteHistory(siteID: siteID, period: period), body: nullBody)
+        let response: Response<EnergySiteHistory> = try await request(.getEnergySiteHistory(siteID: siteID, period: period))
         return response.response
     }
     
@@ -522,7 +519,7 @@ extension TeslaSwift {
     */
     public func getBatteryStatus(batteryID: String) async throws -> BatteryStatus {
         _ = try await checkAuthentication()
-        let response: Response<BatteryStatus> = try await request(.getBatteryStatus(batteryID: batteryID), body: nullBody)
+        let response: Response<BatteryStatus> = try await request(.getBatteryStatus(batteryID: batteryID))
         return response.response
     }
     
@@ -533,7 +530,7 @@ extension TeslaSwift {
     */
     public func getBatteryData(batteryID: String) async throws -> BatteryData {
         _ = try await checkAuthentication()
-        let response: Response<BatteryData> = try await request(.getBatteryData(batteryID: batteryID), body: nullBody)
+        let response: Response<BatteryData> = try await request(.getBatteryData(batteryID: batteryID))
         return response.response
     }
     
@@ -544,7 +541,7 @@ extension TeslaSwift {
     */
     public func getBatteryPowerHistory(batteryID: String) async throws -> BatteryPowerHistory {
         _ = try await checkAuthentication()
-        let response: Response<BatteryPowerHistory> = try await request(.getBatteryPowerHistory(batteryID: batteryID), body: nullBody)
+        let response: Response<BatteryPowerHistory> = try await request(.getBatteryPowerHistory(batteryID: batteryID))
         return response.response
     }
 }
@@ -578,6 +575,12 @@ extension TeslaSwift {
             }
         }
 	}
+
+    private func request<ReturnType: Decodable>(
+        _ endpoint: Endpoint
+    ) async throws -> ReturnType {
+        try await request(endpoint, body: Optional<String>.none)
+    }
 
     private func request<ReturnType: Decodable, BodyType: Encodable>(
         _ endpoint: Endpoint, body: BodyType
@@ -660,12 +663,10 @@ extension TeslaSwift {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
 
-		if let body = body as? String, body == nullBody {
-            // Shrug
-		} else {
-			request.httpBody = try? teslaJSONEncoder.encode(body)
-			request.setValue("application/json", forHTTPHeaderField: "content-type")
-		}
+        if case let Optional<Encodable>.some(body) = body as Any {
+            request.httpBody = try? teslaJSONEncoder.encode(body)
+            request.setValue("application/json", forHTTPHeaderField: "content-type")
+        }
 
         var debugString = ""
 
@@ -680,9 +681,7 @@ extension TeslaSwift {
             debugString += headersString
 		}
 		
-		if let body = body as? String, body != nullBody {
-            // Shrug
-		} else if let jsonString = body.jsonString {
+        if case let Optional<Encodable>.some(body) = body as Any, let jsonString = body.jsonString {
             debugString += "\nREQUEST BODY: \(jsonString)"
 		}
 
