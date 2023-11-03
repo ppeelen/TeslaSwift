@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os
 
 public enum TeslaError: Error, Equatable {
     case networkError(error: NSError)
@@ -55,6 +56,8 @@ open class TeslaSwift {
     public init(teslaAPI: TeslaAPI) {
         self.teslaAPI = teslaAPI
     }
+
+    private let logger = Logger(subsystem: "Tesla Swift", category: "Tesla Swift")
 }
 
 //MARK: Partner APIs
@@ -601,32 +604,33 @@ extension TeslaSwift {
 
         guard let httpResponse = response as? HTTPURLResponse else { throw TeslaError.failedToParseData }
 
-        var responseString = "\nRESPONSE: \(String(describing: httpResponse.url))"
-        responseString += "\nSTATUS CODE: \(httpResponse.statusCode)"
+        var debugString = "RESPONSE: \(String(describing: httpResponse.url))"
+        debugString += "\nSTATUS CODE: \(httpResponse.statusCode)"
         if let headers = httpResponse.allHeaderFields as? [String: String] {
-            responseString += "\nHEADERS: [\n"
+            debugString += "\nHEADERS: [\n"
             headers.forEach {(key: String, value: String) in
-                responseString += "\"\(key)\": \"\(value)\"\n"
+                debugString += "\"\(key)\": \"\(value)\"\n"
             }
-            responseString += "]"
+            debugString += "]"
         }
-
-        logDebug(responseString, debuggingEnabled: debugEnabled)
 
         if case 200..<300 = httpResponse.statusCode {
             do {
                 let objectString = String.init(data: data, encoding: String.Encoding.utf8) ?? "No Body"
-                logDebug("RESPONSE BODY: \(objectString)\n", debuggingEnabled: debugEnabled)
+                debugString += "\nRESPONSE BODY: \(objectString)\n"
+                logDebug(debugString, debuggingEnabled: debugEnabled)
 
                 let mapped = try teslaJSONDecoder.decode(ReturnType.self, from: data)
                 return mapped
             } catch {
-                logDebug("ERROR: \(error)", debuggingEnabled: debugEnabled)
+                debugString += "\nERROR: \(error)"
+                logDebug(debugString, debuggingEnabled: debugEnabled)
                 throw TeslaError.failedToParseData
             }
         } else {
             let objectString = String.init(data: data, encoding: String.Encoding.utf8) ?? "No Body"
-            logDebug("RESPONSE BODY ERROR: \(objectString)\n", debuggingEnabled: debugEnabled)
+            debugString += "\nRESPONSE BODY ERROR: \(objectString)\n"
+            logDebug(debugString, debuggingEnabled: debugEnabled)
             if let wwwAuthenticate = httpResponse.allHeaderFields["Www-Authenticate"] as? String,
                wwwAuthenticate.contains("invalid_token") {
                 throw TeslaError.tokenRevoked
@@ -662,33 +666,36 @@ extension TeslaSwift {
 			request.httpBody = try? teslaJSONEncoder.encode(body)
 			request.setValue("application/json", forHTTPHeaderField: "content-type")
 		}
-		
-		logDebug("\nREQUEST: \(request)", debuggingEnabled: debuggingEnabled)
-		logDebug("METHOD: \(request.httpMethod!)", debuggingEnabled: debuggingEnabled)
+
+        var debugString = ""
+
+        debugString += "REQUEST: \(request)"
+        debugString += "\nMETHOD: \(request.httpMethod!)"
 		if let headers = request.allHTTPHeaderFields {
-			var headersString = "REQUEST HEADERS: [\n"
+			var headersString = "\nREQUEST HEADERS: [\n"
 			headers.forEach {(key: String, value: String) in
 				headersString += "\"\(key)\": \"\(value)\"\n"
 			}
 			headersString += "]"
-			logDebug(headersString, debuggingEnabled: debuggingEnabled)
+            debugString += headersString
 		}
 		
 		if let body = body as? String, body != nullBody {
             // Shrug
 		} else if let jsonString = body.jsonString {
-			logDebug("REQUEST BODY: \(jsonString)", debuggingEnabled: debuggingEnabled)
+            debugString += "\nREQUEST BODY: \(jsonString)"
 		}
-		
+
+        logDebug(debugString, debuggingEnabled: debuggingEnabled)
+
 		return request
 	}
-	
-}
 
-func logDebug(_ format: String, debuggingEnabled: Bool) {
-	if debuggingEnabled {
-		print(format)
-	}
+    private func logDebug(_ format: String, debuggingEnabled: Bool) {
+        if debuggingEnabled {
+            logger.debug("\(format)")
+        }
+    }
 }
 
 public let teslaJSONEncoder: JSONEncoder = {

@@ -9,6 +9,7 @@
 import Foundation
 import Starscream
 import TeslaSwift
+import os
 
 enum TeslaStreamingError: Error {
     case streamingMissingVehicleTokenOrEmail
@@ -41,7 +42,9 @@ public class TeslaStreaming {
     private var httpStreaming: WebSocket
     private var webSocketTask: URLSessionWebSocketTask
     private var teslaSwift: TeslaSwift
-    
+
+    private static let logger = Logger(subsystem: "Tesla Swift", category: "Tesla Streaming")
+
     public init(teslaSwift: TeslaSwift) {
         webSocketTask = URLSession(configuration: .default).webSocketTask(with: URL(string: "wss://streaming.vn.teslamotors.com/streaming/")!)
 
@@ -51,7 +54,7 @@ public class TeslaStreaming {
 
     private static func logDebug(_ format: String, debuggingEnabled: Bool) {
         if debuggingEnabled {
-            print(format)
+            logger.debug("\(format)")
         }
     }
 
