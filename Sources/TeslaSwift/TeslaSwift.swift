@@ -117,7 +117,7 @@ extension TeslaSwift {
         return token != nil && (token?.isValid ?? false)
     }
 
-    #if canImport(WebKit) && canImport(UIKit)
+    #if canImport(WebKit) && (canImport(UIKit) || canImport(AppKit))
     /**
      Performs the authentication with the Tesla API for web logins
 
@@ -256,7 +256,7 @@ extension TeslaSwift {
         email = nil
         password = nil
         cleanToken()
-        #if canImport(WebKit) && canImport(UIKit)
+        #if canImport(WebKit) && (canImport(UIKit) || canImport(AppKit))
         TeslaWebLoginViewController.removeCookies()
         #endif
     }

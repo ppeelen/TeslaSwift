@@ -17,6 +17,14 @@
 		1AA73E8D235B3FA40088D66A /* MaxDefrostCommandOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA73E8B235B3FA40088D66A /* MaxDefrostCommandOptions.swift */; };
 		1AABBBAB242646E200FFED6C /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABBBA9242646E200FFED6C /* Speed.swift */; };
 		1AC5CB1322DA7807009B7190 /* TeslaSwift+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC5CB1122DA7807009B7190 /* TeslaSwift+Combine.swift */; };
+		2A294EBF2AFD60AC00C1FCFF /* TeslaSwiftMacOsDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A294EBE2AFD60AC00C1FCFF /* TeslaSwiftMacOsDemoApp.swift */; };
+		2A294EC12AFD60AC00C1FCFF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A294EC02AFD60AC00C1FCFF /* ContentView.swift */; };
+		2A294EC32AFD60AC00C1FCFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A294EC22AFD60AC00C1FCFF /* Assets.xcassets */; };
+		2A294EC62AFD60AC00C1FCFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A294EC52AFD60AC00C1FCFF /* Preview Assets.xcassets */; };
+		2A294ECC2AFD60D100C1FCFF /* TeslaSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2A294ECB2AFD60D100C1FCFF /* TeslaSwift */; };
+		2A294ECE2AFD60D100C1FCFF /* TeslaSwiftCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 2A294ECD2AFD60D100C1FCFF /* TeslaSwiftCombine */; };
+		2A294ED02AFD60D100C1FCFF /* TeslaSwiftStreaming in Frameworks */ = {isa = PBXBuildFile; productRef = 2A294ECF2AFD60D100C1FCFF /* TeslaSwiftStreaming */; };
+		2A294ED22AFD60D100C1FCFF /* TeslaSwiftStreamingCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 2A294ED12AFD60D100C1FCFF /* TeslaSwiftStreamingCombine */; };
 		650A507E218ABAEF0068EC13 /* SoftwareUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A507C218ABAEF0068EC13 /* SoftwareUpdate.swift */; };
 		708FBA46274D75E70026CEEF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708FBA44274D75E70026CEEF /* Product.swift */; };
 		708FBA49274E9CE40026CEEF /* EnergySiteStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708FBA47274E9CE30026CEEF /* EnergySiteStatus.swift */; };
@@ -139,6 +147,12 @@
 		1AA73E8B235B3FA40088D66A /* MaxDefrostCommandOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxDefrostCommandOptions.swift; sourceTree = "<group>"; };
 		1AABBBA9242646E200FFED6C /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
 		1AC5CB1122DA7807009B7190 /* TeslaSwift+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TeslaSwift+Combine.swift"; sourceTree = "<group>"; };
+		2A294EBC2AFD60AB00C1FCFF /* TeslaSwiftMacOsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeslaSwiftMacOsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A294EBE2AFD60AC00C1FCFF /* TeslaSwiftMacOsDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeslaSwiftMacOsDemoApp.swift; sourceTree = "<group>"; };
+		2A294EC02AFD60AC00C1FCFF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2A294EC22AFD60AC00C1FCFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2A294EC52AFD60AC00C1FCFF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2A294EC72AFD60AC00C1FCFF /* TeslaSwiftMacOsDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeslaSwiftMacOsDemo.entitlements; sourceTree = "<group>"; };
 		45C81FFBA84397F3FE471905 /* Pods_TeslaSwiftAll_TeslaSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeslaSwiftAll_TeslaSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50BF831C9E3C5642B8EE0D30 /* Pods_TeslaSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeslaSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		650A507C218ABAEF0068EC13 /* SoftwareUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftwareUpdate.swift; sourceTree = "<group>"; };
@@ -253,6 +267,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2A294EB92AFD60AB00C1FCFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A294ED02AFD60D100C1FCFF /* TeslaSwiftStreaming in Frameworks */,
+				2A294ECE2AFD60D100C1FCFF /* TeslaSwiftCombine in Frameworks */,
+				2A294ECC2AFD60D100C1FCFF /* TeslaSwift in Frameworks */,
+				2A294ED22AFD60D100C1FCFF /* TeslaSwiftStreamingCombine in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CFD2E7BE1C8A13D60005E882 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -357,6 +382,26 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2A294EBD2AFD60AC00C1FCFF /* TeslaSwiftMacOsDemo */ = {
+			isa = PBXGroup;
+			children = (
+				2A294EBE2AFD60AC00C1FCFF /* TeslaSwiftMacOsDemoApp.swift */,
+				2A294EC02AFD60AC00C1FCFF /* ContentView.swift */,
+				2A294EC22AFD60AC00C1FCFF /* Assets.xcassets */,
+				2A294EC72AFD60AC00C1FCFF /* TeslaSwiftMacOsDemo.entitlements */,
+				2A294EC42AFD60AC00C1FCFF /* Preview Content */,
+			);
+			path = TeslaSwiftMacOsDemo;
+			sourceTree = "<group>";
+		};
+		2A294EC42AFD60AC00C1FCFF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				2A294EC52AFD60AC00C1FCFF /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		972A07A9A28D45E77B9699F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +498,7 @@
 				CFD2E7E61C8A13E20005E882 /* Sources */,
 				CFD2E7C31C8A13D60005E882 /* TeslaSwiftDemo */,
 				CFD2E7DA1C8A13D60005E882 /* TeslaSwiftTests */,
+				2A294EBD2AFD60AC00C1FCFF /* TeslaSwiftMacOsDemo */,
 				CFD2E7C21C8A13D60005E882 /* Products */,
 				972A07A9A28D45E77B9699F5 /* Frameworks */,
 			);
@@ -463,6 +509,7 @@
 			children = (
 				CFD2E7C11C8A13D60005E882 /* TeslaSwiftDemo.app */,
 				CFD2E7D71C8A13D60005E882 /* TeslaSwiftDemoTests.xctest */,
+				2A294EBC2AFD60AB00C1FCFF /* TeslaSwiftMacOsDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -511,6 +558,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2A294EBB2AFD60AB00C1FCFF /* TeslaSwiftMacOsDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A294EC82AFD60AC00C1FCFF /* Build configuration list for PBXNativeTarget "TeslaSwiftMacOsDemo" */;
+			buildPhases = (
+				2A294EB82AFD60AB00C1FCFF /* Sources */,
+				2A294EB92AFD60AB00C1FCFF /* Frameworks */,
+				2A294EBA2AFD60AB00C1FCFF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TeslaSwiftMacOsDemo;
+			packageProductDependencies = (
+				2A294ECB2AFD60D100C1FCFF /* TeslaSwift */,
+				2A294ECD2AFD60D100C1FCFF /* TeslaSwiftCombine */,
+				2A294ECF2AFD60D100C1FCFF /* TeslaSwiftStreaming */,
+				2A294ED12AFD60D100C1FCFF /* TeslaSwiftStreamingCombine */,
+			);
+			productName = TeslaSwiftMacOsDemo;
+			productReference = 2A294EBC2AFD60AB00C1FCFF /* TeslaSwiftMacOsDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		CFD2E7C01C8A13D60005E882 /* TeslaSwiftDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFD2E7E01C8A13D60005E882 /* Build configuration list for PBXNativeTarget "TeslaSwiftDemo" */;
@@ -556,13 +626,15 @@
 		CFD2E7B91C8A13D60005E882 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Joao Nunes";
 				TargetAttributes = {
+					2A294EBB2AFD60AB00C1FCFF = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					CFD2E7C01C8A13D60005E882 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = RMBS8HAUHZ;
 						LastSwiftMigration = 1020;
 					};
 					CFD2E7D61C8A13D60005E882 = {
@@ -590,11 +662,21 @@
 			targets = (
 				CFD2E7C01C8A13D60005E882 /* TeslaSwiftDemo */,
 				CFD2E7D61C8A13D60005E882 /* TeslaSwiftDemoTests */,
+				2A294EBB2AFD60AB00C1FCFF /* TeslaSwiftMacOsDemo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2A294EBA2AFD60AB00C1FCFF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A294EC62AFD60AC00C1FCFF /* Preview Assets.xcassets in Resources */,
+				2A294EC32AFD60AC00C1FCFF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CFD2E7BF1C8A13D60005E882 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -650,6 +732,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2A294EB82AFD60AB00C1FCFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A294EC12AFD60AC00C1FCFF /* ContentView.swift in Sources */,
+				2A294EBF2AFD60AC00C1FCFF /* TeslaSwiftMacOsDemoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CFD2E7BD1C8A13D60005E882 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -760,6 +851,88 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2A294EC92AFD60AC00C1FCFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TeslaSwiftMacOsDemo/TeslaSwiftMacOsDemo.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TeslaSwiftMacOsDemo/Preview Content\"";
+				DEVELOPMENT_TEAM = 6B3SHVL3L5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Joao Nunes. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = se.apptrix.TeslaSwiftMacOsDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2A294ECA2AFD60AC00C1FCFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TeslaSwiftMacOsDemo/TeslaSwiftMacOsDemo.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TeslaSwiftMacOsDemo/Preview Content\"";
+				DEVELOPMENT_TEAM = 6B3SHVL3L5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Joao Nunes. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = se.apptrix.TeslaSwiftMacOsDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		CFD2E7DE1C8A13D60005E882 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -871,7 +1044,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = RMBS8HAUHZ;
+				DEVELOPMENT_TEAM = 6B3SHVL3L5;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -888,7 +1061,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = RMBS8HAUHZ;
+				DEVELOPMENT_TEAM = 6B3SHVL3L5;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -946,6 +1119,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2A294EC82AFD60AC00C1FCFF /* Build configuration list for PBXNativeTarget "TeslaSwiftMacOsDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A294EC92AFD60AC00C1FCFF /* Debug */,
+				2A294ECA2AFD60AC00C1FCFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CFD2E7BC1C8A13D60005E882 /* Build configuration list for PBXProject "TeslaSwiftDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -987,6 +1169,22 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2A294ECB2AFD60D100C1FCFF /* TeslaSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TeslaSwift;
+		};
+		2A294ECD2AFD60D100C1FCFF /* TeslaSwiftCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TeslaSwiftCombine;
+		};
+		2A294ECF2AFD60D100C1FCFF /* TeslaSwiftStreaming */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TeslaSwiftStreaming;
+		};
+		2A294ED12AFD60D100C1FCFF /* TeslaSwiftStreamingCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TeslaSwiftStreamingCombine;
+		};
 		CF489E962AEDB04E00A3BE69 /* TeslaSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TeslaSwift;
