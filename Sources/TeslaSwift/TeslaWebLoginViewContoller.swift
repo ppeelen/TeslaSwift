@@ -40,9 +40,7 @@ extension TeslaWebLoginViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url, url.absoluteString.localizedStandardContains("code=") {
             decisionHandler(.cancel)
-            if let presentedViewController = presentedViewControllers?.first {
-                self.dismiss(presentedViewController)
-            }
+            self.view.window?.close()
             self.continuation?.resume(returning: url)
         } else {
             decisionHandler(.allow)
@@ -50,9 +48,7 @@ extension TeslaWebLoginViewController: WKNavigationDelegate {
     }
 
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        if let presentedViewController = presentedViewControllers?.first {
-            self.dismiss(presentedViewController)
-        }
+        self.view.window?.close()
         self.continuation?.resume(throwing: TeslaError.authenticationFailed)
     }
 }
