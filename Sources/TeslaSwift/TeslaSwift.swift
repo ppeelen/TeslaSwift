@@ -658,9 +658,9 @@ extension TeslaSwift {
         request.setValue("TeslaApp/4.9.2", forHTTPHeaderField: "x-tesla-user-agent")
 
 		if let token = self.token?.accessToken {
-			request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+			request.setValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         } else if let token = self.partnerToken?.accessToken {
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            request.setValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         }
 
         if case let Optional<Encodable>.some(body) = body as Any {
